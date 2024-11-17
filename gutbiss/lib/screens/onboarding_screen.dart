@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gutbiss/screens/login_screen.dart';
 import '../models/onboarding_content.dart';
-import 'home_screen.dart';
+//import 'home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -37,9 +38,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  void _navigateToHome() {
+  // void _navigateToHome() {
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //     MaterialPageRoute(builder: (_) => const HomeScreen()),
+  //     (route) => false,
+  //   );
+  // }
+
+  void _navigateToLogin() {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
       (route) => false,
     );
   }
@@ -56,7 +64,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: _navigateToHome,
+                  onPressed: _navigateToLogin,
                   child: const Text('Skip'),
                 ),
               ),
@@ -167,7 +175,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ElevatedButton(
                           onPressed: () {
                             if (_currentPage == _contents.length - 1) {
-                              _navigateToHome();
+                              _navigateToLogin();
                             } else {
                               _pageController.nextPage(
                                 duration: const Duration(milliseconds: 300),
