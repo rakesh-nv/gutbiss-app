@@ -37,6 +37,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller.forward().then((_) {
       Future.delayed(const Duration(seconds: 1), () {
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (_) => const OnboardingScreen()),
           (route) => false,

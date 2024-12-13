@@ -48,7 +48,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     },
   ];
 
-  String _estimatedTime = '30 minutes'; // Example default value
+  final String _estimatedTime = '30 minutes'; // Example default value
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +179,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                         widget.order.driverPhone != null)
                       ElevatedButton.icon(
                         onPressed: () {
-                          // TODO: Implement call driver
+                          
                         },
                         icon: const Icon(Icons.phone),
                         label: const Text('Call Driver'),
@@ -192,7 +192,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     const SizedBox(height: 8),
                     OutlinedButton.icon(
                       onPressed: () {
-                        // TODO: Implement contact support
+                        
                       },
                       icon: const Icon(Icons.support_agent),
                       label: const Text('Contact Support'),

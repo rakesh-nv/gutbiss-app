@@ -316,7 +316,7 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                // TODO: Add item to cart
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(

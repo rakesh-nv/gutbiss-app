@@ -210,7 +210,6 @@ class _FavoritesScreenState extends State<FavoritesScreen>
               IconButton(
                 icon: const Icon(Icons.favorite, color: Colors.deepOrange),
                 onPressed: () {
-                  // TODO: Implement remove from favorites
                   setState(() {
                     _favoriteRestaurants.remove(restaurant);
                   });
@@ -288,8 +287,7 @@ class _FavoritesScreenState extends State<FavoritesScreen>
               ),
               IconButton(
                 icon: const Icon(Icons.favorite, color: Colors.deepOrange),
-                onPressed: () {
-                  // TODO: Implement remove from favorites
+                onPressed: () { 
                   setState(() {
                     _favoriteItems.remove(item);
                   });

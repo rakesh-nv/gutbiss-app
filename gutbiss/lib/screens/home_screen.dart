@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'restaurant_details_screen.dart';
 import 'profile_screen.dart';
 import 'favorites_screen.dart';
@@ -16,17 +17,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _screens = [
+    final List<Widget> screens = [
       // Home content
       _buildHomeContent(),
-      const Center(child: Text('Orders')), // TODO: Create Orders screen
+      const Center(child: Text('Orders')),
       const FavoritesScreen(), // Add Favorites screen
-      const ProfileScreen(), // Add Profile screen
     ];
 
     return Scaffold(
       body: SafeArea(
-        child: _screens[_selectedIndex],
+        child: screens[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -50,10 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_border),
             label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
           ),
         ],
       ),
@@ -84,16 +80,30 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
               icon: const Icon(Icons.filter_list),
-              onPressed: () {
-                // TODO: Implement filters
-              },
+              onPressed: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  );
+                },
+                child: const CircleAvatar(
+                  child: Icon(Icons.person_outlined),
+                ),
+              ),
             ),
           ],
         ),
 
         // Promotional Banner
         SliverToBoxAdapter(
-          child: Container(
+          child: SizedBox(
             height: 200,
             child: PageView(
               children: [
@@ -136,19 +146,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 16),
                 SizedBox(
-                  height: 120,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      _buildCategoryItem('All', Icons.restaurant, Colors.deepOrange),
-                      _buildCategoryItem('Pizza', Icons.local_pizza, Colors.red),
-                      _buildCategoryItem('Burger', Icons.lunch_dining, Colors.amber),
-                      _buildCategoryItem('Sushi', Icons.set_meal, Colors.blue),
-                      _buildCategoryItem('Dessert', Icons.cake, Colors.pink),
-                      _buildCategoryItem('Drinks', Icons.local_bar, Colors.purple),
-                    ],
-                  ),
-                ),
+                    height: 165,
+                    child: GridView(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                            crossAxisSpacing: 2,
+                            mainAxisSpacing: 2.5,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _buildCategoryItem('Biryani', 'assets/img/cat1.jpg'),
+                        _buildCategoryItem('Pizza', 'assets/img/cat2.jpg'),
+                        _buildCategoryItem('Burger', 'assets/img/cat3.jpg'),
+                        _buildCategoryItem('Samosa', 'assets/img/cat4.jpg'),
+                        _buildCategoryItem('Chinese', 'assets/img/cat5.jpg'),
+                        _buildCategoryItem('Cake', 'assets/img/cat6.jpg'),
+                        _buildCategoryItem('South Indian', 'assets/img/cat7.jpg'),
+                        _buildCategoryItem('Sandwich', 'assets/img/cat8.jpg'),
+                        _buildCategoryItem('Burger', 'assets/img/cat3.jpg'),
+                        _buildCategoryItem('Sushi', 'assets/img/cat4.jpg'),
+                        _buildCategoryItem('Dessert', 'assets/img/cat5.jpg'),
+                        _buildCategoryItem('Drinks', 'assets/img/cat1.jpg'),
+                      ],
+                    )
+                    // ListView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   children: [
+                    //     _buildCategoryItem('All', Icons.restaurant, Colors.deepOrange),
+                    //     _buildCategoryItem('Pizza', Icons.local_pizza, Colors.red),
+                    //     _buildCategoryItem('Burger', Icons.lunch_dining, Colors.amber),
+                    //     _buildCategoryItem('Sushi', Icons.set_meal, Colors.blue),
+                    //     _buildCategoryItem('Dessert', Icons.cake, Colors.pink),
+                    //     _buildCategoryItem('Drinks', Icons.local_bar, Colors.purple),
+                    //   ],
+                    // ),
+                    ),
               ],
             ),
           ),
@@ -169,9 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    // TODO: Show all restaurants
-                  },
+                  onPressed: () {},
                   child: const Text('See All'),
                 ),
               ],
@@ -186,25 +217,25 @@ class _HomeScreenState extends State<HomeScreen> {
               'Italian Restaurant',
               '4.5',
               '20-30 min',
-              '\$2.99',
+              '\₹2.99',
               'Italian cuisine • Pizza • Pasta',
-              Icons.restaurant,
+              'assets/img/rest1.jpg',
             ),
             _buildRestaurantItem(
               'Sushi Place',
               '4.8',
               '25-35 min',
-              '\$3.99',
+              '\₹3.99',
               'Japanese • Sushi • Asian',
-              Icons.set_meal,
+              'assets/img/rest2.jpg',
             ),
             _buildRestaurantItem(
               'Burger Joint',
               '4.2',
               '15-25 min',
-              '\$1.99',
+              '\₹1.99',
               'American • Burgers • Fast Food',
-              Icons.lunch_dining,
+              'assets/img/rest3.jpg',
             ),
           ]),
         ),
@@ -212,13 +243,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildPromoBanner(String title, String subtitle, Color color, IconData icon) {
+  Widget _buildPromoBanner(
+      String title, String subtitle, Color color, IconData icon) {
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
+        // ignore: deprecated_member_use
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
+        // ignore: deprecated_member_use
         border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Row(
@@ -241,6 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   subtitle,
                   style: TextStyle(
                     fontSize: 16,
+                    // ignore: deprecated_member_use
                     color: color.withOpacity(0.8),
                   ),
                 ),
@@ -250,6 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Icon(
             icon,
             size: 80,
+            // ignore: deprecated_member_use
             color: color.withOpacity(0.3),
           ),
         ],
@@ -257,30 +293,32 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCategoryItem(String title, IconData icon, Color color) {
+  Widget _buildCategoryItem(
+    String title,
+    String imageUrl,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(right: 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Icon(
-              icon,
-              size: 40,
-              color: color,
+          SizedBox(
+            width: 65,
+            height: 65,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                imageUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 3),
           Text(
             title,
             style: const TextStyle(
-              fontSize: 14,
+              fontSize: 9,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -295,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String deliveryTime,
     String deliveryFee,
     String description,
-    IconData icon,
+    String imageUrl,
   ) {
     return GestureDetector(
       onTap: () {
@@ -327,20 +365,21 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Restaurant Image/Icon
+            // Restaurant Image
             Container(
               height: 150,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-              ),
-              child: Center(
-                child: Icon(
-                  icon,
-                  size: 60,
-                  color: Colors.deepOrange,
+              // decoration: BoxDecoration(
+              //  color: Colors.grey.shade100,
+              //   borderRadius: const BorderRadius.vertical(
+              //     top: Radius.circular(20),
+              //   ),
+              // ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
               ),
             ),
@@ -435,4 +474,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-} 
+}

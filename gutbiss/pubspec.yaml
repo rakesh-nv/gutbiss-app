@@ -92,6 +92,7 @@ flutter:
 
   assets:
     - assets/icons/app_logo.png
+    - assets/img/
 
 flutter_launcher_icons:
   android: true

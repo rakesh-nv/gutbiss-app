@@ -18,15 +18,64 @@ class RestaurantDetailsScreen extends StatefulWidget {
   });
 
   @override
-  State<RestaurantDetailsScreen> createState() => _RestaurantDetailsScreenState();
+  State<RestaurantDetailsScreen> createState() =>
+      _RestaurantDetailsScreenState();
 }
 
 class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> _categories = ['Starters', 'Main Course', 'Drinks', 'Desserts'];
-  
+  final List<String> _categories = [
+    'Starters',
+    'Main Course',
+    'Drinks',
+    'Desserts'
+  ];
+
   final List<MenuItem> _menuItems = [
+    MenuItem(
+      name: 'Caesar Salad',
+      description:
+          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+      price: 8.99,
+      image: 'salad',
+      category: 'Starters',
+    ), MenuItem(
+      name: 'Caesar Salad',
+      description:
+          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+      price: 8.99,
+      image: 'salad',
+      category: 'Starters',
+    ), MenuItem(
+      name: 'Caesar Salad',
+      description:
+          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+      price: 8.99,
+      image: 'salad',
+      category: 'Starters',
+    ), MenuItem(
+      name: 'Caesar Salad',
+      description:
+          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+      price: 8.99,
+      image: 'salad',
+      category: 'Starters',
+    ), MenuItem(
+      name: 'Caesar Salad',
+      description:
+          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+      price: 8.99,
+      image: 'salad',
+      category: 'Starters',
+    ), MenuItem(
+      name: 'Caesar Salad',
+      description:
+          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+      price: 8.99,
+      image: 'salad',
+      category: 'Starters',
+    ),
     MenuItem(
       name: 'Margherita Pizza',
       description: 'Fresh tomatoes, mozzarella, basil, and olive oil',
@@ -35,11 +84,11 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
       category: 'Main Course',
     ),
     MenuItem(
-      name: 'Caesar Salad',
-      description: 'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
-      price: 8.99,
-      image: 'salad',
-      category: 'Starters',
+      name: 'Margherita Pizza',
+      description: 'Fresh tomatoes, mozzarella, basil, and olive oil',
+      price: 12.99,
+      image: 'pizza',
+      category: 'Main Course',
     ),
     // Add more menu items...
   ];
@@ -133,19 +182,21 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     'Authentic Italian cuisine with a modern twist. We use only the freshest ingredients to create memorable dishes.',
                     style: TextStyle(color: Colors.grey),
                   ),
+
                 ],
               ),
             ),
           ),
 
-          // Menu Categories Tabs
+          //Menu Categories Tabs
           SliverPersistentHeader(
             pinned: true,
             delegate: _SliverAppBarDelegate(
               TabBar(
                 controller: _tabController,
                 isScrollable: true,
-                tabs: _categories.map((category) => Tab(text: category)).toList(),
+                tabs:
+                    _categories.map((category) => Tab(text: category)).toList(),
                 labelColor: Colors.deepOrange,
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: Colors.deepOrange,
@@ -155,12 +206,14 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
 
           // Menu Items
           SliverFillRemaining(
+            fillOverscroll: true,
             child: TabBarView(
               controller: _tabController,
               children: _categories.map((category) {
                 final categoryItems = _menuItems
                     .where((item) => item.category == category)
                     .toList();
+
                 return ListView.builder(
                   padding: const EdgeInsets.all(16),
                   itemCount: categoryItems.length,
@@ -233,7 +286,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${item.price.toStringAsFixed(2)}',
+                          '\₹${item.price.toStringAsFixed(2)}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -241,9 +294,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {
-                            // TODO: Implement add to cart
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.deepOrange,
                             foregroundColor: Colors.white,
@@ -280,7 +331,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-                // TODO: Show reviews
                 _showReviews();
               },
               style: ElevatedButton.styleFrom(
@@ -387,6 +437,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get minExtent => _tabBar.preferredSize.height;
+
   @override
   double get maxExtent => _tabBar.preferredSize.height;
 
@@ -406,4 +457,4 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return false;
   }
-} 
+}

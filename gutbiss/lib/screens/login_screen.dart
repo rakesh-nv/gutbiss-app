@@ -19,6 +19,21 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
 
   Future<void> insertRecord() async {
+    // Validate email format
+
+    // final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+    // if (!emailRegex.hasMatch(email.text)) {
+
+    //   print('Please enter a valid email address');
+    //   return; // Exit the function if email is invalid
+    // }
+
+    // // Validate password length
+    // if (password.text.length < 6) {
+    //   print('Password must be at least 6 characters long');
+    //   return; // Exit the function if password is too short
+    // }
+
     if (email.text != "" && password.text != "") {
       try {
         String url = "http://10.0.2.2/dbgutbis/insert_record.php";
@@ -33,15 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
         var response = jsonDecode(res.body);
         //print(response);
         if (response['success'] == true) {
-          print("Inserted successfully");
+          debugPrint("Inserted successfully");
         } else {
-          print('something wrong');
+          debugPrint('something wrong');
         }
       } catch (e) {
-        print(e);
+        debugPrint(e as String?);
       }
     } else {
-      print('please fill the all fields');
+      debugPrint('please fill the all fields');
     }
   }
 
@@ -53,15 +68,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _navigateToHome() {
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
-      (route) => false,
+    // Navigator.of(context).pushAndRemoveUntil(
+    //   MaterialPageRoute(builder: (_) => const HomeScreen()),
+    //   (route) => false,
+    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -70,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: 45),
+                const SizedBox(height: 45),
                 // Logo
                 Container(
                   width: 120,
@@ -79,7 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: BoxDecoration(
                     color: Colors.deepOrange.shade50,
                     shape: BoxShape.circle,
-                    
                   ),
                   child: Image.asset(
                     // insert the logo
@@ -95,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 48),
-            
+
                 // Email field
                 TextField(
                   controller: email,
@@ -107,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 16),
-            
+
                 // Password field
                 TextField(
                   controller: password,
@@ -131,24 +152,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: _obscurePassword,
                 ),
                 const SizedBox(height: 8),
-            
+
                 // Forgot password button
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {
-                      // TODO: Implement forgot password
-                    },
+                    onPressed: () {},
                     child: const Text('Forgot Password?'),
                   ),
                 ),
                 const SizedBox(height: 24),
-            
+
                 // Login button
                 ElevatedButton(
                   onPressed: () {
-                    _navigateToHome();
-                    insertRecord();
+                    // Validate email and password
+                    if (email.text.isNotEmpty && password.text.isNotEmpty) {
+                      insertRecord();
+                      _navigateToHome();
+                    } else {
+                      debugPrint('Please fill in all fields');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -161,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-            
+
                 // Social login options
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -175,42 +199,34 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-            
+
                 // Social login buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _socialLoginButton(
                       icon: Icons.g_mobiledata,
-                      onPressed: () {
-                        // TODO: Implement Google login
-                      },
+                      onPressed: () {},
                     ),
                     _socialLoginButton(
                       icon: Icons.facebook,
-                      onPressed: () {
-                        // TODO: Implement Facebook login
-                      },
+                      onPressed: () {},
                     ),
                     _socialLoginButton(
                       icon: Icons.apple,
-                      onPressed: () {
-                        // TODO: Implement Apple login
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
                 const SizedBox(height: 24),
-            
+
                 // Sign up link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Don't have an account?"),
                     TextButton(
-                      onPressed: () {
-                        // TODO: Navigate to sign up screen
-                      },
+                      onPressed: () {},
                       child: const Text('Sign Up'),
                     ),
                   ],

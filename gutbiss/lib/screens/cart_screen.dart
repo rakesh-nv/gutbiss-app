@@ -11,7 +11,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final TextEditingController _promoController = TextEditingController();
-  
+
   // Sample cart items (replace with actual cart data)
   final List<CartItem> _cartItems = [
     CartItem(
@@ -32,7 +32,7 @@ class _CartScreenState extends State<CartScreen> {
     ),
   ];
 
-  double _deliveryFee = 2.99;
+  final double _deliveryFee = 2.99;
   String? _appliedPromoCode;
   double _promoDiscount = 0.0;
 
@@ -57,7 +57,7 @@ class _CartScreenState extends State<CartScreen> {
 
   void _updateQuantity(CartItem item, int newQuantity) {
     if (newQuantity < 1) return;
-    
+
     setState(() {
       final index = _cartItems.indexWhere((cartItem) => cartItem.id == item.id);
       if (index != -1) {
@@ -175,7 +175,7 @@ class _CartScreenState extends State<CartScreen> {
                       if (_promoDiscount > 0) ...[
                         const SizedBox(height: 8),
                         _buildSummaryRow(
-                          'Discount (${_appliedPromoCode})',
+                          'Discount ($_appliedPromoCode)',
                           -_promoDiscount,
                           isDiscount: true,
                         ),
@@ -325,7 +325,8 @@ class _CartScreenState extends State<CartScreen> {
                   child: Row(
                     children: [
                       IconButton(
-                        onPressed: () => _updateQuantity(item, item.quantity - 1),
+                        onPressed: () =>
+                            _updateQuantity(item, item.quantity - 1),
                         icon: const Icon(Icons.remove),
                         iconSize: 20,
                       ),
@@ -337,7 +338,8 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () => _updateQuantity(item, item.quantity + 1),
+                        onPressed: () =>
+                            _updateQuantity(item, item.quantity + 1),
                         icon: const Icon(Icons.add),
                         iconSize: 20,
                       ),
@@ -373,14 +375,18 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
         Text(
-          isDiscount ? '-\$${amount.toStringAsFixed(2)}' : '\$${amount.toStringAsFixed(2)}',
+          isDiscount
+              ? '-\$${amount.toStringAsFixed(2)}'
+              : '\$${amount.toStringAsFixed(2)}',
           style: TextStyle(
             fontSize: isTotal ? 18 : 16,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-            color: isDiscount ? Colors.green : (isTotal ? Colors.black : Colors.grey.shade600),
+            color: isDiscount
+                ? Colors.green
+                : (isTotal ? Colors.black : Colors.grey.shade600),
           ),
         ),
       ],
     );
   }
-} 
+}

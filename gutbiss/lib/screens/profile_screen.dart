@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
-              // TODO: Navigate to edit profile screen
+              
             },
           ),
         ],
@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: 'Addresses',
               icon: Icons.location_on,
               onTap: () {
-                // TODO: Navigate to addresses screen
+                
               },
               trailing: Text('${_savedAddresses.length} Saved'),
             ),
@@ -134,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: 'Payment Methods',
               icon: Icons.payment,
               onTap: () {
-                // TODO: Navigate to payment methods screen
+                
               },
               trailing: Text('${_paymentMethods.length} Saved'),
             ),
@@ -143,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: 'Recent Orders',
               icon: Icons.receipt,
               onTap: () {
-                // TODO: Navigate to recent orders screen
+               
               },
               trailing: Text('${_recentOrders.length} Recent'),
             ),
@@ -253,7 +253,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           TextButton(
             onPressed: () {
-              // TODO: Implement logout logic
+             
               Navigator.pop(context);
             },
             style: TextButton.styleFrom(

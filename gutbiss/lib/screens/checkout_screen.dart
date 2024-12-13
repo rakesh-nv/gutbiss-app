@@ -102,7 +102,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                   TextButton.icon(
                     onPressed: () {
-                      // TODO: Implement add new address
                       Navigator.pop(context);
                     },
                     icon: const Icon(Icons.add),
@@ -170,7 +169,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
                 TextButton.icon(
                   onPressed: () {
-                    // TODO: Implement add new payment method
+                 
                     Navigator.pop(context);
                   },
                   icon: const Icon(Icons.add),
@@ -412,7 +411,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
       child: ElevatedButton(
         onPressed: () {
-          // TODO: Implement place order
+        
           _showOrderConfirmation();
         },
         style: ElevatedButton.styleFrom(

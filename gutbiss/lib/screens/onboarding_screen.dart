@@ -13,7 +13,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-  
+
   final List<OnboardingContent> _contents = [
     OnboardingContent(
       title: 'Find Your Favorite Food',
@@ -54,6 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -68,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: const Text('Skip'),
                 ),
               ),
-              
+
               // Page view
               Expanded(
                 child: PageView.builder(
@@ -100,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                           const SizedBox(height: 32),
-                          
+
                           // Title
                           Text(
                             _contents[index].title,
@@ -111,7 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Description
                           Text(
                             _contents[index].description,
@@ -127,7 +128,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                 ),
               ),
-              
+
               // Indicators and buttons
               Padding(
                 padding: const EdgeInsets.all(40.0),
@@ -146,13 +147,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             borderRadius: BorderRadius.circular(5),
                             color: _currentPage == index
                                 ? Colors.deepOrange
+                                // ignore: deprecated_member_use
                                 : Colors.deepOrange.withOpacity(0.3),
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 32),
-                    
+
                     // Navigation buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,7 +172,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           )
                         else
                           const SizedBox(width: 80),
-                        
+
                         // Next/Get Started button
                         ElevatedButton(
                           onPressed: () {
@@ -221,4 +223,4 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         return Icons.error;
     }
   }
-} 
+}
