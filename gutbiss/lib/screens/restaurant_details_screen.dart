@@ -8,6 +8,7 @@ class RestaurantDetailsScreen extends StatefulWidget {
   final String rating;
   final String deliveryTime;
   final String deliveryFee;
+  final dynamic restaurantImg;
 
   const RestaurantDetailsScreen({
     super.key,
@@ -15,6 +16,7 @@ class RestaurantDetailsScreen extends StatefulWidget {
     required this.rating,
     required this.deliveryTime,
     required this.deliveryFee,
+    required this.restaurantImg,
   });
 
   @override
@@ -25,6 +27,7 @@ class RestaurantDetailsScreen extends StatefulWidget {
 class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
   final List<String> _categories = [
     'Starters',
     'Main Course',
@@ -40,35 +43,40 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
       price: 8.99,
       image: 'salad',
       category: 'Starters',
-    ), MenuItem(
+    ),
+    MenuItem(
       name: 'Caesar Salad',
       description:
           'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
       price: 8.99,
       image: 'salad',
       category: 'Starters',
-    ), MenuItem(
+    ),
+    MenuItem(
       name: 'Caesar Salad',
       description:
           'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
       price: 8.99,
       image: 'salad',
       category: 'Starters',
-    ), MenuItem(
+    ),
+    MenuItem(
       name: 'Caesar Salad',
       description:
           'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
       price: 8.99,
       image: 'salad',
       category: 'Starters',
-    ), MenuItem(
+    ),
+    MenuItem(
       name: 'Caesar Salad',
       description:
           'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
       price: 8.99,
       image: 'salad',
       category: 'Starters',
-    ), MenuItem(
+    ),
+    MenuItem(
       name: 'Caesar Salad',
       description:
           'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
@@ -124,108 +132,113 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          // Restaurant Header
-          SliverAppBar(
-            expandedHeight: 200,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                color: Colors.deepOrange.shade50,
-                child: const Icon(
-                  Icons.restaurant,
-                  size: 80,
-                  color: Colors.deepOrange,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            // Restaurant Header
+            SliverAppBar(
+              expandedHeight: 200,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
+                  child: Image.asset(
+                    widget.restaurantImg,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                ),
+                title: Text(widget.restaurantName),
+              ),
+            ),
+
+            // Restaurant Info
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 20),
+                        const SizedBox(width: 4),
+                        Text(widget.rating),
+                        const SizedBox(width: 16),
+                        const Icon(Icons.access_time,
+                            color: Colors.grey, size: 20),
+                        const SizedBox(width: 4),
+                        Text(widget.deliveryTime),
+                        const SizedBox(width: 16),
+                        Text(
+                          widget.deliveryFee,
+                          style: const TextStyle(
+                            color: Colors.deepOrange,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'About',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Authentic Italian cuisine with a modern twist. We use only the freshest ingredients to create memorable dishes.',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
                 ),
               ),
-              title: Text(widget.restaurantName),
             ),
-          ),
 
-          // Restaurant Info
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 20),
-                      const SizedBox(width: 4),
-                      Text(widget.rating),
-                      const SizedBox(width: 16),
-                      const Icon(Icons.access_time, color: Colors.grey, size: 20),
-                      const SizedBox(width: 4),
-                      Text(widget.deliveryTime),
-                      const SizedBox(width: 16),
-                      Text(
-                        widget.deliveryFee,
-                        style: const TextStyle(
-                          color: Colors.deepOrange,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'About',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Authentic Italian cuisine with a modern twist. We use only the freshest ingredients to create memorable dishes.',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-
-                ],
+            //Menu Categories Tabs
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _SliverAppBarDelegate(
+                TabBar(
+                  controller: _tabController,
+                  isScrollable: true,
+                  tabs: _categories
+                      .map((category) => Tab(text: category))
+                      .toList(),
+                  labelColor: Colors.deepOrange,
+                  unselectedLabelColor: Colors.grey,
+                  indicatorColor: Colors.deepOrange,
+                ),
               ),
             ),
-          ),
 
-          //Menu Categories Tabs
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SliverAppBarDelegate(
-              TabBar(
+            // Menu Items
+            SliverFillRemaining(
+              fillOverscroll: true,
+              child: TabBarView(
                 controller: _tabController,
-                isScrollable: true,
-                tabs:
-                    _categories.map((category) => Tab(text: category)).toList(),
-                labelColor: Colors.deepOrange,
-                unselectedLabelColor: Colors.grey,
-                indicatorColor: Colors.deepOrange,
+                children: _categories.map((category) {
+                  final categoryItems = _menuItems
+                      .where((item) => item.category == category)
+                      .toList();
+
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: categoryItems.length,
+                    itemBuilder: (context, index) {
+                      final item = categoryItems[index];
+                      return _buildMenuItem(item);
+                    },
+                  );
+                }).toList(),
               ),
             ),
-          ),
-
-          // Menu Items
-          SliverFillRemaining(
-            fillOverscroll: true,
-            child: TabBarView(
-              controller: _tabController,
-              children: _categories.map((category) {
-                final categoryItems = _menuItems
-                    .where((item) => item.category == category)
-                    .toList();
-
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: categoryItems.length,
-                  itemBuilder: (context, index) {
-                    final item = categoryItems[index];
-                    return _buildMenuItem(item);
-                  },
-                );
-              }).toList(),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: _buildBottomBar(),
     );
@@ -255,10 +268,13 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(
-                  Icons.restaurant,
-                  size: 40,
-                  color: Colors.deepOrange,
+                // child: const Icon(
+                //   Icons.restaurant,
+                //   size: 40,
+                //   color: Colors.deepOrange,
+                // ),
+                child: Container(
+                  color: Colors.red,
                 ),
               ),
               const SizedBox(width: 16),

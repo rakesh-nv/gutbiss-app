@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 _buildPromoBanner(
                   'Free Delivery',
-                  'On orders above \$20',
+                  'On orders above \₹20',
                   Colors.green,
                   Icons.delivery_dining,
                 ),
@@ -151,8 +151,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                            crossAxisSpacing: 2,
-                            mainAxisSpacing: 2.5,
+                        crossAxisSpacing: 2,
+                        mainAxisSpacing: 2.5,
                       ),
                       scrollDirection: Axis.horizontal,
                       children: [
@@ -162,7 +162,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         _buildCategoryItem('Samosa', 'assets/img/cat4.jpg'),
                         _buildCategoryItem('Chinese', 'assets/img/cat5.jpg'),
                         _buildCategoryItem('Cake', 'assets/img/cat6.jpg'),
-                        _buildCategoryItem('South Indian', 'assets/img/cat7.jpg'),
+                        _buildCategoryItem(
+                            'South Indian', 'assets/img/cat7.jpg'),
                         _buildCategoryItem('Sandwich', 'assets/img/cat8.jpg'),
                         _buildCategoryItem('Burger', 'assets/img/cat3.jpg'),
                         _buildCategoryItem('Sushi', 'assets/img/cat4.jpg'),
@@ -214,6 +215,29 @@ class _HomeScreenState extends State<HomeScreen> {
         SliverList(
           delegate: SliverChildListDelegate([
             _buildRestaurantItem(
+              'Italian Restaurant',
+              '4.5',
+              '20-30 min',
+              '\₹2.99',
+              'Italian cuisine • Pizza • Pasta',
+              'assets/img/rest1.jpg',
+            ),
+            _buildRestaurantItem(
+              'Sushi Place',
+              '4.8',
+              '25-35 min',
+              '\₹3.99',
+              'Japanese • Sushi • Asian',
+              'assets/img/rest2.jpg',
+            ),
+            _buildRestaurantItem(
+              'Burger Joint',
+              '4.2',
+              '15-25 min',
+              '\₹1.99',
+              'American • Burgers • Fast Food',
+              'assets/img/rest3.jpg',
+            ), _buildRestaurantItem(
               'Italian Restaurant',
               '4.5',
               '20-30 min',
@@ -305,12 +329,17 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             width: 65,
             height: 65,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
+            child: InkWell(
+              onTap: () {
+                print('hello');
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
               ),
             ),
           ),
@@ -345,6 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
               rating: rating,
               deliveryTime: deliveryTime,
               deliveryFee: deliveryFee,
+              restaurantImg:imageUrl,
             ),
           ),
         );
@@ -450,20 +480,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.grey.shade600,
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      const SizedBox(width: 5),
                       Icon(
                         Icons.delivery_dining,
                         size: 16,
                         color: Colors.grey.shade600,
                       ),
-                      const SizedBox(width: 4),
-                      Text(
-                        deliveryFee,
-                        style: const TextStyle(
-                          color: Colors.deepOrange,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      // const SizedBox(width: 25),
+                      // Text(
+                      //   deliveryFee,
+                      //   style: const TextStyle(
+                      //     color: Colors.deepOrange,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],

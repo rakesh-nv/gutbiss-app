@@ -151,6 +151,8 @@ class _FavoritesScreenState extends State<FavoritesScreen>
                 rating: restaurant['rating'],
                 deliveryTime: restaurant['deliveryTime'],
                 deliveryFee: restaurant['deliveryFee'],
+                restaurantImg: '',
+
               ),
             ),
           );

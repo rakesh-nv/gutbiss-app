@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gutbiss/screens/settings_screen.dart';
 import '../models/user_profile.dart';
 import '../models/delivery_address.dart';
 import '../models/payment_method.dart';
@@ -16,15 +17,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // Sample user data (replace with actual user data)
   final UserProfile _user = UserProfile(
     id: '1',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
+    name: 'N V RAKESH',
+    email: 'rakesh123@gmail.con',
     phoneNumber: '+1 234 567 8900',
     notificationsEnabled: true,
   );
 
   final List<Order> _recentOrders = []; // Add sample orders here
   final List<DeliveryAddress> _savedAddresses = []; // Add sample addresses here
-  final List<PaymentMethod> _paymentMethods = []; // Add sample payment methods here
+  final List<PaymentMethod> _paymentMethods =
+      []; // Add sample payment methods here
 
   bool _notificationsEnabled = true;
   String _selectedLanguage = 'English';
@@ -38,9 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () {
-              
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -124,27 +124,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildSection(
               title: 'Addresses',
               icon: Icons.location_on,
-              onTap: () {
-                
-              },
+              onTap: () {},
               trailing: Text('${_savedAddresses.length} Saved'),
             ),
 
             _buildSection(
               title: 'Payment Methods',
               icon: Icons.payment,
-              onTap: () {
-                
-              },
+              onTap: () {},
               trailing: Text('${_paymentMethods.length} Saved'),
             ),
 
             _buildSection(
               title: 'Recent Orders',
               icon: Icons.receipt,
-              onTap: () {
-               
-              },
+              onTap: () {},
               trailing: Text('${_recentOrders.length} Recent'),
             ),
 
@@ -155,8 +149,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: 'Settings',
               icon: Icons.settings,
               onTap: () {
-                _showLanguageSelector();
-                _showNotificationToggle();
+                //_showLanguageSelector();
+                // _showNotificationToggle();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => settings(),
+                  ),
+                );
               },
             ),
 
@@ -197,46 +197,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void _showLanguageSelector() {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                'Select Language',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            ...List.generate(
-              _availableLanguages.length,
-              (index) => RadioListTile<String>(
-                value: _availableLanguages[index],
-                groupValue: _selectedLanguage,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedLanguage = value!;
-                  });
-                  Navigator.pop(context);
-                },
-                title: Text(_availableLanguages[index]),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // void _showLanguageSelector() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     builder: (context) => Container(
+  //       padding: const EdgeInsets.symmetric(vertical: 20),
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           const Padding(
+  //             padding: EdgeInsets.all(16),
+  //             child: Text(
+  //               'Select Language',
+  //               style: TextStyle(
+  //                 fontSize: 20,
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //             ),
+  //           ),
+  //           ...List.generate(
+  //             _availableLanguages.length,
+  //             (index) => RadioListTile<String>(
+  //               value: _availableLanguages[index],
+  //               groupValue: _selectedLanguage,
+  //               onChanged: (value) {
+  //                 setState(() {
+  //                   _selectedLanguage = value!;
+  //                 });
+  //                 Navigator.pop(context);
+  //               },
+  //               title: Text(_availableLanguages[index]),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   void _showLogoutConfirmation() {
     showDialog(
@@ -253,7 +253,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           TextButton(
             onPressed: () {
-             
               Navigator.pop(context);
             },
             style: TextButton.styleFrom(
@@ -296,4 +295,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-} 
+}
