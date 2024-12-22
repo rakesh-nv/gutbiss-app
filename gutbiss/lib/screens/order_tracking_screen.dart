@@ -19,9 +19,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   bool _isMapReady = false;
 
   // Sample delivery agent location (replace with real-time data)
-  final LatLng _driverLocation = const LatLng(37.7749, -122.4194);
-  final LatLng _restaurantLocation = const LatLng(37.7748, -122.4192);
-  final LatLng _deliveryLocation = const LatLng(37.7750, -122.4196);
+  // final LatLng _driverLocation = const LatLng(37.7749, -122.4194);
+  // final LatLng _restaurantLocation = const LatLng(37.7748, -122.4192);
+  // final LatLng _deliveryLocation = const LatLng(37.7750, -122.4196);
 
   Set<Marker> _markers = {};
   Set<Polyline> _polylines = {};
@@ -36,36 +36,36 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     _markers = {
       Marker(
         markerId: const MarkerId('driver'),
-        position: _driverLocation,
+        //position: _driverLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
         infoWindow: const InfoWindow(title: 'Driver'),
       ),
       Marker(
         markerId: const MarkerId('restaurant'),
-        position: _restaurantLocation,
+        //position: _restaurantLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
         infoWindow: InfoWindow(title: widget.order.restaurantName),
       ),
       Marker(
         markerId: const MarkerId('delivery'),
-        position: _deliveryLocation,
+        //position: _deliveryLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
         infoWindow: const InfoWindow(title: 'Delivery Location'),
       ),
     };
 
-    _polylines = {
-      Polyline(
-        polylineId: const PolylineId('route'),
-        color: Colors.blue,
-        width: 5,
-        points: [
-          _restaurantLocation,
-          _driverLocation,
-          _deliveryLocation,
-        ],
-      ),
-    };
+    // _polylines = {
+    //   Polyline(
+    //     polylineId: const PolylineId('route'),
+    //     color: Colors.blue,
+    //     width: 5,
+    //     points: [
+    //       _restaurantLocation,
+    //       _driverLocation,
+    //       _deliveryLocation,
+    //     ],
+    //   ),
+    // };
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -73,27 +73,26 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     setState(() {
       _isMapReady = true;
     });
-    _fitBounds();
+   // _fitBounds();
   }
 
-  void _fitBounds() {
-    if (!_isMapReady) return;
-
-    final bounds = LatLngBounds(
-      southwest: LatLng(
-        [_driverLocation.latitude, _restaurantLocation.latitude, _deliveryLocation.latitude].reduce((a, b) => a < b ? a : b),
-        [_driverLocation.longitude, _restaurantLocation.longitude, _deliveryLocation.longitude].reduce((a, b) => a < b ? a : b),
-      ),
-      northeast: LatLng(
-        [_driverLocation.latitude, _restaurantLocation.latitude, _deliveryLocation.latitude].reduce((a, b) => a > b ? a : b),
-        [_driverLocation.longitude, _restaurantLocation.longitude, _deliveryLocation.longitude].reduce((a, b) => a > b ? a : b),
-      ),
-    );
-
-    _mapController.animateCamera(
-      CameraUpdate.newLatLngBounds(bounds, 100),
-    );
-  }
+  // void _fitBounds() {
+  //   if (!_isMapReady) return;
+  //   final bounds = LatLngBounds(
+  //     southwest: LatLng(
+  //       [_driverLocation.latitude, _restaurantLocation.latitude, _deliveryLocation.latitude].reduce((a, b) => a < b ? a : b),
+  //       [_driverLocation.longitude, _restaurantLocation.longitude, _deliveryLocation.longitude].reduce((a, b) => a < b ? a : b),
+  //     ),
+  //     northeast: LatLng(
+  //       [_driverLocation.latitude, _restaurantLocation.latitude, _deliveryLocation.latitude].reduce((a, b) => a > b ? a : b),
+  //       [_driverLocation.longitude, _restaurantLocation.longitude, _deliveryLocation.longitude].reduce((a, b) => a > b ? a : b),
+  //     ),
+  //   );
+  //
+  //   _mapController.animateCamera(
+  //     CameraUpdate.newLatLngBounds(bounds, 100),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,17 +105,17 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
           // Map View
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.4,
-            child: GoogleMap(
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: _driverLocation,
-                zoom: 15,
-              ),
-              markers: _markers,
-              polylines: _polylines,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-            ),
+            // child: GoogleMap(
+            //   onMapCreated: _onMapCreated,
+            //   initialCameraPosition: CameraPosition(
+            //     target: _driverLocation,
+            //     zoom: 15,
+            //   ),
+            //   markers: _markers,
+            //   polylines: _polylines,
+            //   myLocationEnabled: true,
+            //   myLocationButtonEnabled: true,
+            // ),
           ),
 
           // Order Status

@@ -37,65 +37,64 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
 
   final List<MenuItem> _menuItems = [
     MenuItem(
-      name: 'Caesar Salad',
-      description:
-          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
-      price: 8.99,
-      image: 'salad',
+      name: 'Biryani',
+      description: 'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+      price: 299,
+      image: 'assets/img/cat1.jpg',
       category: 'Starters',
     ),
-    MenuItem(
-      name: 'Caesar Salad',
-      description:
-          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
-      price: 8.99,
-      image: 'salad',
-      category: 'Starters',
-    ),
-    MenuItem(
-      name: 'Caesar Salad',
-      description:
-          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
-      price: 8.99,
-      image: 'salad',
-      category: 'Starters',
-    ),
-    MenuItem(
-      name: 'Caesar Salad',
-      description:
-          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
-      price: 8.99,
-      image: 'salad',
-      category: 'Starters',
-    ),
-    MenuItem(
-      name: 'Caesar Salad',
-      description:
-          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
-      price: 8.99,
-      image: 'salad',
-      category: 'Starters',
-    ),
-    MenuItem(
-      name: 'Caesar Salad',
-      description:
-          'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
-      price: 8.99,
-      image: 'salad',
-      category: 'Starters',
-    ),
+    // MenuItem(
+    //   name: 'Caesar Salad',
+    //   description:
+    //       'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+    //   price: 8.99,
+    //   image: 'salad',
+    //   category: 'Starters',
+    // ),
+    // MenuItem(
+    //   name: 'Caesar Salad',
+    //   description:
+    //       'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+    //   price: 8.99,
+    //   image: 'salad',
+    //   category: 'Starters',
+    // ),
+    // MenuItem(
+    //   name: 'Caesar Salad',
+    //   description:
+    //       'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+    //   price: 8.99,
+    //   image: 'salad',
+    //   category: 'Starters',
+    // ),
+    // MenuItem(
+    //   name: 'Caesar Salad',
+    //   description:
+    //       'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+    //   price: 8.99,
+    //   image: 'salad',
+    //   category: 'Starters',
+    // ),
+    // MenuItem(
+    //   name: 'Caesar Salad',
+    //   description:
+    //       'Romaine lettuce, croutons, parmesan cheese with Caesar dressing',
+    //   price: 8.99,
+    //   image: 'salad',
+    //   category: 'Starters',
+    // ),
+    // MenuItem(
+    //   name: 'Margherita Pizza',
+    //   description: 'Fresh tomatoes, mozzarella, basil, and olive oil',
+    //   price: 12.99,
+    //   image: 'pizza',
+    //   category: 'Main Course',
+    // ),
     MenuItem(
       name: 'Margherita Pizza',
       description: 'Fresh tomatoes, mozzarella, basil, and olive oil',
-      price: 12.99,
-      image: 'pizza',
-      category: 'Main Course',
-    ),
-    MenuItem(
-      name: 'Margherita Pizza',
-      description: 'Fresh tomatoes, mozzarella, basil, and olive oil',
-      price: 12.99,
-      image: 'pizza',
+      price: 399,
+      image: 'assets/img/cat2.jpg',
       category: 'Main Course',
     ),
     // Add more menu items...
@@ -103,13 +102,13 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
 
   final List<Review> _reviews = [
     Review(
-      userName: 'John Doe',
+      userName: 'Naveen',
       rating: 4.5,
       comment: 'Great food and fast delivery! Will order again.',
       date: '2024-03-15',
     ),
     Review(
-      userName: 'Jane Smith',
+      userName: 'Prashant',
       rating: 5.0,
       comment: 'Best Italian food in town! Loved the pizza.',
       date: '2024-03-14',
@@ -150,7 +149,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                     width: double.infinity,
                   ),
                 ),
-                title: Text(widget.restaurantName),
+                //title: Text(widget.restaurantName),
               ),
             ),
 
@@ -225,7 +224,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                   final categoryItems = _menuItems
                       .where((item) => item.category == category)
                       .toList();
-
                   return ListView.builder(
                     padding: const EdgeInsets.all(16),
                     itemCount: categoryItems.length,
@@ -250,7 +248,10 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MenuItemDetailsScreen(menuItem: item),
+            builder: (context) => MenuItemDetailsScreen(
+              menuItem: item,
+              imageUrl: _menuItems[0].image,
+            ),
           ),
         );
       },
@@ -274,7 +275,11 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
                 //   color: Colors.deepOrange,
                 // ),
                 child: Container(
-                  color: Colors.red,
+                  child: Image.asset(
+                    item.image,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
@@ -331,16 +336,13 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen>
 
   Widget _buildBottomBar() {
     return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            offset: const Offset(0, -2),
-            blurRadius: 6,
-          ),
-        ],
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
+        //color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
       child: Row(
         children: [

@@ -15,7 +15,7 @@ class _settingsState extends State<settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('all components'),
+        title: const Text('Settings'),
       ),
       body: Column(
         children: [
@@ -51,6 +51,7 @@ class _settingsState extends State<settings> {
               },
             ),
           ),
+
           // Getx bottom Sheet
           Card(
             child: ListTile(
@@ -58,14 +59,37 @@ class _settingsState extends State<settings> {
               subtitle: const Text('This is a Getx bottom sheet'),
               onTap: () {
                 Get.bottomSheet(
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Column(
-                      children: [
-
-                      ],
+                  Card(
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.black),
+                    //   borderRadius: BorderRadius.circular(30),
+                    // ),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10, left: 10, right: 10),
+                      child: Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 50,right: 50),
+                            child: Divider(height: 3, thickness: 3),
+                          ),
+                          SizedBox(height: 20),
+                          ListTile(
+                            title: const Text("Theme"),
+                            subtitle: const Text('This is a Getx Dialog Box'),
+                            onTap: () {},
+                          ),
+                          const Divider(
+                            color: Colors.black12,
+                          ),
+                          // Getx bottom Sheet
+                          ListTile(
+                            title: const Text("bottom sheet "),
+                            subtitle: const Text('This is a Getx bottom sheet'),
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

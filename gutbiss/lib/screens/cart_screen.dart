@@ -80,6 +80,7 @@ class _CartScreenState extends State<CartScreen> {
         _appliedPromoCode = 'SAVE10';
         _promoDiscount = _subtotal * 0.1; // 10% discount
       });
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Promo code applied successfully!'),
@@ -159,14 +160,14 @@ class _CartScreenState extends State<CartScreen> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade200,
-                        offset: const Offset(0, -2),
-                        blurRadius: 6,
-                      ),
-                    ],
+                    //color: Colors.white,
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.grey.shade200,
+                    //     offset: const Offset(0, -2),
+                    //     blurRadius: 6,
+                    //   ),
+                    // ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -347,7 +348,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 Text(
-                  '\$${item.totalPrice.toStringAsFixed(2)}',
+                  '\₹${item.totalPrice.toStringAsFixed(2)}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -371,19 +372,19 @@ class _CartScreenState extends State<CartScreen> {
           style: TextStyle(
             fontSize: isTotal ? 18 : 16,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-            color: isTotal ? Colors.black : Colors.grey.shade600,
+            //color: isTotal ? Colors.black : Colors.grey.shade600,
           ),
         ),
         Text(
           isDiscount
-              ? '-\$${amount.toStringAsFixed(2)}'
-              : '\$${amount.toStringAsFixed(2)}',
+              ? '-\₹${amount.toStringAsFixed(2)}'
+              : '\₹${amount.toStringAsFixed(2)}',
           style: TextStyle(
             fontSize: isTotal ? 18 : 16,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-            color: isDiscount
-                ? Colors.green
-                : (isTotal ? Colors.black : Colors.grey.shade600),
+            // color: isDiscount
+            //     ? Colors.green
+            //     : (isTotal ? Colors.black : Colors.grey.shade600),
           ),
         ),
       ],

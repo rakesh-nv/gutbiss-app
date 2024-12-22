@@ -5,10 +5,12 @@ import '../screens/cart_screen.dart';
 
 class MenuItemDetailsScreen extends StatefulWidget {
   final MenuItem menuItem;
+  final String imageUrl;
 
   const MenuItemDetailsScreen({
     super.key,
     required this.menuItem,
+    required this.imageUrl,
   });
 
   @override
@@ -87,10 +89,10 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: Colors.grey.shade200,
-                child: const Icon(
-                  Icons.restaurant,
-                  size: 100,
-                  color: Colors.deepOrange,
+                child:Image.asset(
+                  widget.imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
               ),
             ),
@@ -246,7 +248,7 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
                     Text(choice.name),
                     if (choice.additionalPrice > 0)
                       Text(
-                        ' (+\$${choice.additionalPrice.toStringAsFixed(2)})',
+                        ' (+\₹${choice.additionalPrice.toStringAsFixed(2)})',
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.deepOrange,
@@ -266,7 +268,7 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
                     _calculateTotalPrice();
                   });
                 },
-                selectedColor: Colors.deepOrange.shade100,
+                //selectedColor: Colors.deepOrange.shade100,
                 checkmarkColor: Colors.deepOrange,
               );
             }).toList(),
@@ -281,14 +283,14 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            offset: const Offset(0, -2),
-            blurRadius: 6,
-          ),
-        ],
+        //color: Colors.white,
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.grey.shade200,
+        //     offset: const Offset(0, -2),
+        //     blurRadius: 6,
+        //   ),
+        // ],
       ),
       child: Row(
         children: [
@@ -303,7 +305,7 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
                 ),
               ),
               Text(
-                '\$${_totalPrice.toStringAsFixed(2)}',
+                '\₹${_totalPrice.toStringAsFixed(2)}',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -316,7 +318,6 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
           Expanded(
             child: ElevatedButton(
               onPressed: () {
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -336,4 +337,4 @@ class _MenuItemDetailsScreenState extends State<MenuItemDetailsScreen> {
       ),
     );
   }
-} 
+}

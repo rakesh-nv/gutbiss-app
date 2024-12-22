@@ -11,7 +11,8 @@ class OrderConfirmationScreen extends StatefulWidget {
   });
 
   @override
-  State<OrderConfirmationScreen> createState() => _OrderConfirmationScreenState();
+  State<OrderConfirmationScreen> createState() =>
+      _OrderConfirmationScreenState();
 }
 
 class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
@@ -71,11 +72,11 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Order #${widget.order.id}',
+                          'Order id #${widget.order.id}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -141,22 +142,24 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               title: 'Order Summary',
               content: Column(
                 children: [
-                  ...widget.order.items.map((item) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${item.quantity}x ${item.name}',
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              '\$${item.totalPrice.toStringAsFixed(2)}',
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      )),
+                  ...widget.order.items.map(
+                    (item) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${item.quantity}x ${item.name}',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            '\₹${item.totalPrice.toStringAsFixed(2)}',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   const Divider(height: 24),
                   _buildSummaryRow('Subtotal', widget.order.subtotal),
                   _buildSummaryRow('Delivery Fee', widget.order.deliveryFee),
@@ -178,9 +181,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                     if (widget.order.status == OrderStatus.onTheWay &&
                         widget.order.driverPhone != null)
                       ElevatedButton.icon(
-                        onPressed: () {
-                          
-                        },
+                        onPressed: () {},
                         icon: const Icon(Icons.phone),
                         label: const Text('Call Driver'),
                         style: ElevatedButton.styleFrom(
@@ -191,9 +192,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                       ),
                     const SizedBox(height: 8),
                     OutlinedButton.icon(
-                      onPressed: () {
-                        
-                      },
+                      onPressed: () {},
                       icon: const Icon(Icons.support_agent),
                       label: const Text('Contact Support'),
                       style: OutlinedButton.styleFrom(
@@ -213,8 +212,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     return Column(
       children: List.generate(_trackingSteps.length, (index) {
         final step = _trackingSteps[index];
-        final isCompleted =
-            widget.order.status.index >= step['status'].index;
+        final isCompleted = widget.order.status.index >= step['status'].index;
         final isActive = widget.order.status == step['status'];
 
         return Row(
@@ -225,9 +223,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: isCompleted
-                        ? Colors.deepOrange
-                        : Colors.grey.shade300,
+                    color:
+                        isCompleted ? Colors.deepOrange : Colors.grey.shade300,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -240,9 +237,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                   Container(
                     width: 2,
                     height: 30,
-                    color: isCompleted
-                        ? Colors.deepOrange
-                        : Colors.grey.shade300,
+                    color:
+                        isCompleted ? Colors.deepOrange : Colors.grey.shade300,
                   ),
               ],
             ),
@@ -281,39 +277,34 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
     required String title,
     required Widget content,
   }) {
-    return Container(
+    return Card(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            offset: const Offset(0, 2),
-            blurRadius: 6,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          content,
-        ],
+            const SizedBox(height: 16),
+            content,
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildSummaryRow(String label, double amount,
-      {bool isTotal = false, bool isDiscount = false}) {
+  Widget _buildSummaryRow(
+    String label,
+    double amount, {
+    bool isTotal = false,
+    bool isDiscount = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -328,8 +319,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           ),
           Text(
             isDiscount
-                ? '-\$${amount.toStringAsFixed(2)}'
-                : '\$${amount.toStringAsFixed(2)}',
+                ? '-\₹${amount.toStringAsFixed(2)}'
+                : '\₹${amount.toStringAsFixed(2)}',
             style: TextStyle(
               fontSize: isTotal ? 18 : 16,
               fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
@@ -369,7 +360,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => OrderTrackingScreen(order: widget.order),
+                  builder: (context) =>
+                      OrderTrackingScreen(order: widget.order),
                 ),
               );
             },
@@ -379,4 +371,4 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
       ),
     );
   }
-} 
+}

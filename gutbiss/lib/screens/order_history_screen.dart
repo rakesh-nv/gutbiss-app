@@ -71,7 +71,6 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-      
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -193,7 +192,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                               style: const TextStyle(fontSize: 16),
                             ),
                             Text(
-                              '\$${item.totalPrice.toStringAsFixed(2)}',
+                              '\₹${item.totalPrice.toStringAsFixed(2)}',
                               style: const TextStyle(fontSize: 16),
                             ),
                           ],
@@ -258,9 +257,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       ),
                     const SizedBox(height: 8),
                     OutlinedButton(
-                      onPressed: () {
-                       
-                      },
+                      onPressed: () {},
                       style: OutlinedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 48),
                       ),
@@ -404,7 +401,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                     ),
                   ),
                   Text(
-                    '\$${order.total.toStringAsFixed(2)}',
+                    '\₹${order.total.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -418,9 +415,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: () {
-                       
-                      },
+                      onPressed: () {},
                       child: const Text('Reorder'),
                     ),
                   ),
@@ -476,8 +471,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           ),
           Text(
             isDiscount
-                ? '-\$${amount.toStringAsFixed(2)}'
-                : '\$${amount.toStringAsFixed(2)}',
+                ? '-\₹${amount.toStringAsFixed(2)}'
+                : '\₹${amount.toStringAsFixed(2)}',
             style: TextStyle(
               fontSize: isTotal ? 18 : 16,
               fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
@@ -492,4 +487,4 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   String _getFormattedDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';
   }
-} 
+}

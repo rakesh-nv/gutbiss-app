@@ -29,8 +29,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       []; // Add sample payment methods here
 
   bool _notificationsEnabled = true;
-  String _selectedLanguage = 'English';
-  final List<String> _availableLanguages = ['English', 'Spanish', 'French'];
 
   @override
   Widget build(BuildContext context) {

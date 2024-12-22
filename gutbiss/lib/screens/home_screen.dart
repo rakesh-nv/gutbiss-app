@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'orders_screen.dart';
 import 'restaurant_details_screen.dart';
 import 'profile_screen.dart';
 import 'favorites_screen.dart';
@@ -17,10 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
     final List<Widget> screens = [
       // Home content
       _buildHomeContent(),
-      const Center(child: Text('Orders')),
+      const ordersScreen(),
       const FavoritesScreen(), // Add Favorites screen
     ];
 
@@ -63,14 +66,17 @@ class _HomeScreenState extends State<HomeScreen> {
         SliverAppBar(
           floating: true,
           title: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.only(top: 2),
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              //color: Colors.grey.shade100,
+              border: Border.all(color: Colors.black12),
               borderRadius: BorderRadius.circular(30),
             ),
             child: TextField(
+
               controller: _searchController,
               decoration: const InputDecoration(
+
                 hintText: 'Search for restaurants or dishes',
                 prefixIcon: Icon(Icons.search),
                 border: InputBorder.none,
@@ -162,13 +168,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         _buildCategoryItem('Samosa', 'assets/img/cat4.jpg'),
                         _buildCategoryItem('Chinese', 'assets/img/cat5.jpg'),
                         _buildCategoryItem('Cake', 'assets/img/cat6.jpg'),
-                        _buildCategoryItem(
-                            'South Indian', 'assets/img/cat7.jpg'),
+                        _buildCategoryItem('South Indian', 'assets/img/cat7.jpg'),
                         _buildCategoryItem('Sandwich', 'assets/img/cat8.jpg'),
+                        _buildCategoryItem('Biryani', 'assets/img/cat1.jpg'),
+                        _buildCategoryItem('Pizza', 'assets/img/cat2.jpg'),
                         _buildCategoryItem('Burger', 'assets/img/cat3.jpg'),
-                        _buildCategoryItem('Sushi', 'assets/img/cat4.jpg'),
-                        _buildCategoryItem('Dessert', 'assets/img/cat5.jpg'),
-                        _buildCategoryItem('Drinks', 'assets/img/cat1.jpg'),
+                        _buildCategoryItem('Samosa', 'assets/img/cat4.jpg'),
+                        _buildCategoryItem('Chinese', 'assets/img/cat5.jpg'),
+                        _buildCategoryItem('Cake', 'assets/img/cat6.jpg'),
+                        _buildCategoryItem('South Indian', 'assets/img/cat7.jpg'),
+                        _buildCategoryItem('Sandwich', 'assets/img/cat8.jpg'),
                       ],
                     )
                     // ListView(
@@ -218,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'Italian Restaurant',
               '4.5',
               '20-30 min',
-              '\₹2.99',
+              '\₹299',
               'Italian cuisine • Pizza • Pasta',
               'assets/img/rest1.jpg',
             ),
@@ -226,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'Sushi Place',
               '4.8',
               '25-35 min',
-              '\₹3.99',
+              '\₹399',
               'Japanese • Sushi • Asian',
               'assets/img/rest2.jpg',
             ),
@@ -234,14 +243,15 @@ class _HomeScreenState extends State<HomeScreen> {
               'Burger Joint',
               '4.2',
               '15-25 min',
-              '\₹1.99',
+              '\₹199',
               'American • Burgers • Fast Food',
               'assets/img/rest3.jpg',
-            ), _buildRestaurantItem(
+            ),
+            _buildRestaurantItem(
               'Italian Restaurant',
               '4.5',
               '20-30 min',
-              '\₹2.99',
+              '\₹299',
               'Italian cuisine • Pizza • Pasta',
               'assets/img/rest1.jpg',
             ),
@@ -249,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'Sushi Place',
               '4.8',
               '25-35 min',
-              '\₹3.99',
+              '\₹399',
               'Japanese • Sushi • Asian',
               'assets/img/rest2.jpg',
             ),
@@ -257,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'Burger Joint',
               '4.2',
               '15-25 min',
-              '\₹1.99',
+              '\₹199',
               'American • Burgers • Fast Food',
               'assets/img/rest3.jpg',
             ),
@@ -374,24 +384,13 @@ class _HomeScreenState extends State<HomeScreen> {
               rating: rating,
               deliveryTime: deliveryTime,
               deliveryFee: deliveryFee,
-              restaurantImg:imageUrl,
+              restaurantImg: imageUrl,
             ),
           ),
         );
       },
-      child: Container(
+      child: Card(
         margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade200,
-              offset: const Offset(0, 2),
-              blurRadius: 6,
-            ),
-          ],
-        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

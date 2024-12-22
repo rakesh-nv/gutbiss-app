@@ -20,7 +20,7 @@ class _FavoritesScreenState extends State<FavoritesScreen>
       'name': 'Italian Restaurant',
       'rating': '4.5',
       'deliveryTime': '20-30 min',
-      'deliveryFee': '\$2.99',
+      'deliveryFee': '\₹2.99',
       'cuisine': 'Italian',
       'image': Icons.restaurant,
     },
@@ -28,7 +28,7 @@ class _FavoritesScreenState extends State<FavoritesScreen>
       'name': 'Sushi Place',
       'rating': '4.8',
       'deliveryTime': '25-35 min',
-      'deliveryFee': '\$3.99',
+      'deliveryFee': '\₹3.99',
       'cuisine': 'Japanese',
       'image': Icons.set_meal,
     },
@@ -232,7 +232,7 @@ class _FavoritesScreenState extends State<FavoritesScreen>
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MenuItemDetailsScreen(menuItem: item),
+              builder: (context) => MenuItemDetailsScreen(menuItem: item, imageUrl: 'assets/img/cat1.jpg',),
             ),
           );
         },
@@ -277,7 +277,7 @@ class _FavoritesScreenState extends State<FavoritesScreen>
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '\$${item.price.toStringAsFixed(2)}',
+                      '\₹${item.price.toStringAsFixed(2)}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

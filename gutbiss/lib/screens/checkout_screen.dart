@@ -282,7 +282,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               style: const TextStyle(fontSize: 16),
                             ),
                             Text(
-                              '\$${item.totalPrice.toStringAsFixed(2)}',
+                              '\₹${item.totalPrice.toStringAsFixed(2)}',
                               style: const TextStyle(fontSize: 16),
                             ),
                           ],
@@ -383,8 +383,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
           Text(
             isDiscount
-                ? '-\$${amount.toStringAsFixed(2)}'
-                : '\$${amount.toStringAsFixed(2)}',
+                ? '-\₹${amount.toStringAsFixed(2)}'
+                : '\₹${amount.toStringAsFixed(2)}',
             style: TextStyle(
               fontSize: isTotal ? 18 : 16,
               fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
@@ -400,14 +400,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            offset: const Offset(0, -2),
-            blurRadius: 6,
-          ),
-        ],
+        //color: Colors.white,
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.grey.shade200,
+        //     offset: const Offset(0, -2),
+        //     blurRadius: 6,
+        //   ),
+        // ],
       ),
       child: ElevatedButton(
         onPressed: () {
